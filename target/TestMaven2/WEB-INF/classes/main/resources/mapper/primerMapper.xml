@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YingzuiBean.mapper.PrimerMapper">
+    <select id="getPrimerByID" parameterType="java.lang.String" resultType="primer">
+        select * from ssr_primer where SSR_ID = #{ssrID}
+    </select>
+    <select id="getPrimerByTm" parameterType="java.lang.Double" resultType="primer">
+        select * from ssr_primer where tm >= #{param1} and <![CDATA[tm <= #{param2}]]>
+    </select>
+    <select id="getPrimerByAmpli" parameterType="java.lang.Integer" resultType="primer">
+        select * from ssr_primer where amplicon_len >= #{param1} and <![CDATA[amplicon_len <= #{param2}]]>
+    </select>
+    <select id="getAllPrimer" resultType="primer">
+        select * from ssr_primer
+    </select>
+</mapper>

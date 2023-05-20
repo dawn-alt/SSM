@@ -1,0 +1,60 @@
+.scroll-background{
+    background-image: url("<%=request.getContextPath()%>/resources/images/sprite.png");
+    background-repeat: no-repeat;
+}
+.middle {
+    margin:0  auto;
+    width:100%;
+}
+.left {
+    float:left;
+    clear:right;
+    margin:0;
+    width:20%;
+    height:600px;
+    background:whitesmoke;
+    padding: 2em 2em;
+}
+.content {
+    float:left;
+    clear:right;
+    width:60%;
+    height:600px;
+    background:white;
+    font-family:方正粗黑宋简体;
+    font-size: 20px;
+    color:#122b40;
+    background:url("<%=request.getContextPath()%>/resources/images/aboutour.jpg");
+    background-repeat: no-repeat;
+    background-size: 150%,150%;
+    line-height: 175%;
+}
+.right {
+    float:right;
+    margin:0;
+    width:20%;
+    height:600px;
+    background:whitesmoke;
+    padding: 2em 2em;
+}
+.foot {
+    float:left;
+    width:100%;
+    height:150px;
+    margin: 0;
+    background-color:lightyellow;
+    text-align: center;
+}
+.textinput {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    height: 40px;
+    width:100%;
+}

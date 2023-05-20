@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YingzuiBean.mapper.AllInfoMapper">
+    <select id="getAllInfo" parameterType="All_Info" resultType="All_Info">
+        select ssr_info.SSR_ID,ssr_info.SSRType,ssr_info.SSR_motif,ssr_info.lenSSR,
+        ssr_genome.chromosome,ssr_genome.SSR_start,ssr_genome.SSR_end,
+        ssr_primer.forward_primer,ssr_primer.reverse_primer,ssr_primer.tm,ssr_primer.amplicon_len
+        from ssr_info  inner join ssr_genome  inner join ssr_primer
+        on ssr_info.SSR_ID = ssr_genome.SSR_ID and ssr_genome.SSR_ID = ssr_primer.SSR_ID and ssr_info.SSR_ID = ssr_primer.SSR_ID
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="SSRType != 'select'">
+                and SSRType = #{SSRType}
+            </if>
+            <if test="SSRType != 'compound' and simpleType == 'Di'">
+                and SSR_motif like '(__)%'
+            </if>
+            <if test="SSRType != 'compound' and simpleType == 'Tri'">
+                and SSR_motif like '(___)%'
+            </if>
+            <if test="SSRType != 'compound'  and simpleType == 'Tetra'">
+                and SSR_motif like '(____)%'
+            </if>
+            <if test="SSRType != 'compound'  and simpleType == 'Penta'">
+                and SSR_motif like '(_____)%'
+            </if>
+            <if test="SSRType != 'compound' and simpleType == 'Hexa'">
+                and SSR_motif like '(______)%'
+            </if>
+            <if test="chromosome == 'Contigs'">
+                and chromosome like 'C11%'
+            </if>
+            <if test="chromosome == 'Scaffolds'">
+                and chromosome like 'scaffold%'
+            </if>
+            <if test="chromosome != 'select' and chromosome != 'Contigs' and chromosome != 'Scaffolds'">
+                and chromosome = #{chromosome}
+            </if>
+            <if test="SSR_motif != null">
+                and SSR_motif like concat('%',concat(#{SSR_motif},'%'))
+            </if>
+        </trim>
+    </select>
+
+    <select id="getAll" resultType="All_Info">
+        select ssr_info.SSR_ID,ssr_info.SSRType,ssr_info.SSR_motif,ssr_info.lenSSR,
+        ssr_genome.chromosome,ssr_genome.SSR_start,ssr_genome.SSR_end,
+        ssr_primer.forward_primer,ssr_primer.reverse_primer,ssr_primer.tm,ssr_primer.amplicon_len
+        from ssr_info  inner join ssr_genome  inner join ssr_primer
+        on ssr_info.SSR_ID = ssr_genome.SSR_ID and ssr_genome.SSR_ID = ssr_primer.SSR_ID and ssr_info.SSR_ID = ssr_primer.SSR_ID
+    </select>
+</mapper>

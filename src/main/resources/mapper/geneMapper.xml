@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YingzuiBean.mapper.GeneMapper">
+    <select id="getAllGene"  resultType="gene">
+        select ssr_gene.SSR_ID,ssr_gene.gene_start,ssr_gene.gene_end,ssr_gene.gene_orientation,ssr_gene.genic_nongenic,
+        gene_annotation.entry_names,gene_annotation.protein_names,gene_annotation.organism,gene_annotation.geneID
+        from  ssr_gene inner join gene_annotation
+        on ssr_gene.geneID = gene_annotation.geneID
+    </select>
+    <select id="getGeneBySSRID" parameterType="java.lang.String" resultType="gene">
+        select ssr_gene.SSR_ID,ssr_gene.gene_start,ssr_gene.gene_end,ssr_gene.gene_orientation,ssr_gene.genic_nongenic,
+        gene_annotation.entry_names,gene_annotation.protein_names,gene_annotation.organism,gene_annotation.geneID
+        from  ssr_gene inner join gene_annotation
+        on ssr_gene.geneID = gene_annotation.geneID
+        where SSR_ID = #{ssrID}
+    </select>
+    <select id="getGeneByGeneID" parameterType="java.lang.String" resultType="gene">
+        select ssr_gene.SSR_ID,ssr_gene.gene_start,ssr_gene.gene_end,ssr_gene.gene_orientation,ssr_gene.genic_nongenic,
+        gene_annotation.entry_names,gene_annotation.protein_names,gene_annotation.organism,gene_annotation.geneID
+        from  ssr_gene inner join gene_annotation
+        on ssr_gene.geneID = gene_annotation.geneID
+        where gene_annotation.geneID = #{geneID}
+    </select>
+    <select id="getGeneByIf" parameterType="java.lang.String" resultType="gene">
+        select ssr_gene.SSR_ID,ssr_gene.gene_start,ssr_gene.gene_end,ssr_gene.gene_orientation,ssr_gene.genic_nongenic,
+        gene_annotation.entry_names,gene_annotation.protein_names,gene_annotation.organism,gene_annotation.geneID
+        from  ssr_gene inner join gene_annotation
+        on ssr_gene.geneID = gene_annotation.geneID
+        where genic_Nongenic = #{genic}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YingzuiBean.mapper.GenomeMapper">
+    <select id="getGenomeByID" parameterType="java.lang.String" resultType="genome">
+         select * from ssr_genome where SSR_ID = #{ssrID}
+    </select>
+
+    <select id="getGenomeByChro" parameterType="java.lang.String" resultType="genome">
+        select * from ssr_genome
+        <trim prefix="where" prefixOverrides="and | or">
+          <if test="chromosome == 'Pseudo molecules'">
+              and chromosome like 'Ca%'
+          </if>
+        <if test="chromosome == 'Contigs'">
+            and chromosome like 'C11%'
+        </if>
+        <if test="chromosome == 'Scaffolds'">
+            and chromosome like 'scaffold%'
+        </if>
+        </trim>
+    </select>
+
+    <select id="getAllGenome" resultType="genome">
+         select * from ssr_genome
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YingzuiBean.mapper.SimpleSearchMapper">
+    <select id="getSSRInfoByType" parameterType="java.lang.String"  resultType="SSR_Info">
+        select * from ssr_info where SSRType = #{type1}
+    </select>
+
+    <select id="getSSRInfoByLength" parameterType="java.lang.Integer" resultType="SSR_Info">
+        select * from ssr_info where lenSSR >= #{param1} and <![CDATA[lenSSR <= #{param2}]]>
+    </select>
+
+    <select id="getSSRInfoByDi" resultType="SSR_info">
+         select * from ssr_info where SSRType="simple" and SSR_motif like '(__)%'
+    </select>
+    <select id="getSSRInfoByTri" resultType="SSR_info">
+        select * from ssr_info where SSRType="simple" and SSR_motif like '(___)%'
+    </select>
+    <select id="getSSRInfoByTetra" resultType="SSR_info">
+        select * from ssr_info where SSRType="simple" and SSR_motif like '(____)%'
+    </select>
+    <select id="getSSRInfoByPenta" resultType="SSR_info">
+        select * from ssr_info where SSRType="simple" and SSR_motif like '(_____)%'
+    </select>
+    <select id="getSSRInfoByHexa" resultType="SSR_info">
+        select * from ssr_info where SSRType="simple" and SSR_motif like '(______)%'
+    </select>
+
+    <select id="getSSRInfoByMotif" parameterType="java.lang.String" resultType="SSR_info">
+        select * from ssr_info where SSR_motif like concat('%',concat(#{motif},'%'))
+    </select>
+
+    <select id="getSSRInfoByMulti" parameterType="SSR_Info" resultType="SSR_info">
+       select * from ssr_info
+        <trim prefix="where" prefixOverrides="and | or">
+           <if test="SSRType != null">
+            and SSRType = #{SSRType}
+           </if>
+           <if test="">
+
+           </if>
+        </trim>
+    </select>
+
+    <select id="getAllSSRInfo" resultType="SSR_Info">
+        select * from ssr_info
+    </select>
+</mapper>
